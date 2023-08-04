@@ -43,7 +43,7 @@ baseRouter.post('/subtract', (req, res) => {
     }
 
     else{
-        const sub = first - second;
+        const sub = first;
         res.json ({result : sub}) ;
     }
 });
