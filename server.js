@@ -10,16 +10,42 @@ app.use(express.json());
 const baseRouter = express.Router();
 
 baseRouter.get('/greeting', (req, res) => {
-    return res.send('');
+    return res.send('Hello World!');
 });
 
-baseRouter.post('/add', (req, res) => {
-    res.json({ "": null });
+baseRouter.post('/add', async(req, res) => {
+
+    const { first, second } = req.body;
+
+  if (typeof first !== 'number' || typeof second !== 'number') {
+    res.status(400).json({ error: 'Invalid numbers are provided' });
+  } 
+
+  else {
+    const sum = first + second;
+    res.json({ result: sum });
+  }
+
 });
 
 
 baseRouter.post('/subtract', (req, res) => {
-    res.json({ "": null });
+    
+    const {first,second} = req.body;
+
+    if(typeof first !== 'number' || typeof second !== 'number')
+    {
+        res.status(400).json(
+            {
+                error : 'Invalid numbers are provided'
+            }
+        )
+    }
+
+    else{
+        const sub = first - second;
+        res.json ({result : sub}) ;
+    }
 });
 
 app.use(baseUrl, baseRouter);
